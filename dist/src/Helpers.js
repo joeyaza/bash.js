@@ -1,29 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Helpers {
-
-    public constructor(){}
-
-    public evalCmd(userInput: string): string {
-        
+    constructor() { }
+    evalCmd(userInput) {
         let userCmd = userInput.split(" ")[0];
-
         return this.capitalize(userCmd);
-
     }
-
-    public done(output: any): void {
-
+    done(output) {
         process.stdout.write(output);
-
         process.stdout.write('\nprompt > ');
-
     }
-
-    private capitalize(str): string {
-        
+    capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
-
     }
-
 }
-
-export default Helpers;
+exports.default = Helpers;
+//# sourceMappingURL=Helpers.js.map

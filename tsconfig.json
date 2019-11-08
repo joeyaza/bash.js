@@ -1,17 +1,23 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "es2015",
-        "lib": [
-            "es6"
-        ],
-        "outDir": "dist",
-        "declaration": true,
-        "removeComments": false,
-        "stripInternal": true,
-        "alwaysStrict": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true
-    }
-}
+      "target": "ES6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noImplicitAny": false,
+      "removeComments": true,
+      "noLib": false,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "pretty": true,
+      "declaration": true,
+      "outDir": "dist",
+      "rootDir": ".",
+    },
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+  }

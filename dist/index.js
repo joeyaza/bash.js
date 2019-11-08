@@ -1,13 +1,15 @@
-import * as fs from 'fs';
-// fs.readFile("package.json", (error: Error, data: Buffer) => {
-//     console.log(data.toString());
-// });
-new Promise(function (resolve, reject) {
-    fs.readFile("package.json", function (error, data) {
-        if (error)
-            return reject(error);
-        resolve(data);
-    });
-}).then(function (data) {
-    console.log(data.toString());
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Helpers_1 = require("./src/Helpers");
+const Echo_1 = require("./src/Echo/Echo");
+const cmdMap = {
+    Echo: Echo_1.default
+};
+const helpers = new Helpers_1.default();
+process.stdout.write('prompt > ');
+process.stdin.on('data', (userInput) => {
+    const userInputStr = userInput.toString().trim(), userCmd = helpers.evalCmd(userInputStr).toString(), cmdExec = new cmdMap[userCmd](helpers);
+    console.log(userInputStr.split(" "));
+    cmdExec.exec(userInputStr);
 });
+//# sourceMappingURL=index.js.map
