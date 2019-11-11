@@ -1,4 +1,4 @@
-import Helpers from "./src/HelperMethods/HelperMethods";
+import HelperMethods from "./src/HelperMethods/HelperMethods";
 import Echo from "./src/Echo/Echo";
 
 const cmdMap = {
@@ -11,7 +11,7 @@ export interface ICommand {
 
 }
 
-const helpers = new Helpers();
+const helpers = new HelperMethods();
 
 process.stdout.write('prompt > ');
       

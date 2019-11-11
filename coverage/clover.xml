@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1573478168165" clover="3.2.0">
-  <project timestamp="1573478168165" name="All files">
+<coverage generated="1573487480188" clover="3.2.0">
+  <project timestamp="1573487480188" name="All files">
     <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4" elements="10" coveredelements="10" complexity="0" loc="6" ncloc="6" packages="1" files="1" classes="1"/>
     <file name="HelperMethods.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\HelperMethods\HelperMethods.ts">
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
-      <line num="7" count="1" type="stmt"/>
-      <line num="9" count="1" type="stmt"/>
       <line num="15" count="1" type="stmt"/>
       <line num="17" count="1" type="stmt"/>
       <line num="23" count="1" type="stmt"/>
       <line num="29" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+      <line num="37" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

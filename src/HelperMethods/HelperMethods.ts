@@ -1,12 +1,26 @@
-class HelperMethods {
+export interface Helpers {
+
+    getCmd: (string) => string;
+    getPath: (string) => string;
+    done: (any) => void;
+
+}
+
+class HelperMethods implements Helpers {
 
     public constructor(){}
 
     public getCmd(userInput: string): string {
         
-        let userCmd = userInput.split(" ")[0];
+        const userCmd = userInput.split(" ")[0];
 
-        return this.capitalize(userCmd);
+        return userCmd.charAt(0).toUpperCase() + userCmd.slice(1);
+
+    }
+
+    public getPath(userInput: string): string {
+
+        return userInput.substr(userInput.indexOf(" ") + 1);
 
     }
 
@@ -15,12 +29,6 @@ class HelperMethods {
         process.stdout.write(output);
 
         process.stdout.write('\nprompt > ');
-
-    }
-
-    private capitalize(str): string {
-        
-        return str.charAt(0).toUpperCase() + str.slice(1);
 
     }
 

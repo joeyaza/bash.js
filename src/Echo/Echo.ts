@@ -1,5 +1,5 @@
 import Helpers from "../HelperMethods/HelperMethods";
-import {ICommand} from "../../index"
+import {ICommand} from "../../index";
 
 export default class Echo implements ICommand {
 

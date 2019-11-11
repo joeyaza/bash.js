@@ -3,15 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class HelperMethods {
     constructor() { }
     getCmd(userInput) {
-        let userCmd = userInput.split(" ")[0];
-        return this.capitalize(userCmd);
+        const userCmd = userInput.split(" ")[0];
+        return userCmd.charAt(0).toUpperCase() + userCmd.slice(1);
+    }
+    getPath(userInput) {
+        return userInput.substr(userInput.indexOf(" ") + 1);
     }
     done(output) {
         process.stdout.write(output);
         process.stdout.write('\nprompt > ');
-    }
-    capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 }
 exports.default = HelperMethods;

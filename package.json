@@ -20,7 +20,8 @@
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
-      "**/?(*.)+(spec|test).js?(x)"
+      "**/?(*.)+(spec|test).js?(x)",
+      "!**/?(*.)+(mock).js?(x)"
     ],
     "collectCoverage": true
   }
