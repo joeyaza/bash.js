@@ -1,4 +1,4 @@
-import Helpers from "../Helpers";
+import Helpers from "../HelperMethods/HelperMethods";
 import * as fs from "fs";
 
 export default class Cat {

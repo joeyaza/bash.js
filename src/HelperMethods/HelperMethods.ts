@@ -1,8 +1,8 @@
-class Helpers {
+class HelperMethods {
 
     public constructor(){}
 
-    public evalCmd(userInput: string): string {
+    public getCmd(userInput: string): string {
         
         let userCmd = userInput.split(" ")[0];
 
@@ -26,4 +26,4 @@ class Helpers {
 
 }
 
-export default Helpers;
+export default HelperMethods;

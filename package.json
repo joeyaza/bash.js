@@ -5,14 +5,23 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/index.js"
-  
+    "test": "npm run tsc && jest",
+    "start": "npm run tsc && node dist/index.js",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^12.12.5",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "@types/jest": "^24.0.22",
+    "jest": "^24.9.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec|test).js?(x)"
+    ],
+    "collectCoverage": true
   }
 }

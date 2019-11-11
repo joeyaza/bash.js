@@ -1,4 +1,4 @@
-import Helpers from "./src/Helpers";
+import Helpers from "./src/HelperMethods/HelperMethods";
 import Echo from "./src/Echo/Echo";
 
 const cmdMap = {
@@ -19,7 +19,7 @@ process.stdout.write('prompt > ');
 process.stdin.on('data', (userInput) => {
 
     const userInputStr = userInput.toString().trim(),
-        userCmd: string = helpers.evalCmd(userInputStr).toString(),
+        userCmd: string = helpers.getCmd(userInputStr).toString(),
         cmdExec: ICommand = new cmdMap[userCmd](helpers);
 
         console.log(userInputStr.split(" "))
