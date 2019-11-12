@@ -5,7 +5,6 @@ export default class Head {
 
     constructor(private helpers: Helpers) {
 
-
     }
 
     public exec(fullPath: string, lines: number): Promise<any> {
