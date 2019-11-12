@@ -7,7 +7,11 @@ class HelperMethods {
         return userCmd.charAt(0).toUpperCase() + userCmd.slice(1);
     }
     getPath(userInput) {
-        return userInput.substr(userInput.indexOf(" ") + 1);
+        const lastItem = userInput.split(" ").pop(), lineNumber = Number.isInteger(Number(lastItem)) ? Number(lastItem) : null;
+        return {
+            path: userInput.substr(userInput.indexOf(" ") + 1),
+            lineNumber
+        };
     }
     done(output) {
         process.stdout.write(output);

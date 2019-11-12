@@ -1,3 +1,3 @@
 export interface ICommand {
-    exec: (string: any) => void;
+    exec: (string: any, number?: any) => void;
 }

@@ -1,7 +1,5 @@
 import Echo from "./Echo";
-import HelperMethods from "../HelperMethods/HelperMethods";
-
-jest.mock("./HelperMethods/HelperMethods");
+import HelperMethods from "../HelperMethods/HelperMethods.mock";
 
 const helperMethods = new HelperMethods(),
     echo = new Echo(helperMethods),

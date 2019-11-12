@@ -1,7 +1,7 @@
 export interface Helpers {
 
     getCmd: (string) => string;
-    getPath: (string) => string;
+    getPath: (string) => {};
     done: (any) => void;
 
 }
@@ -18,9 +18,15 @@ class HelperMethods implements Helpers {
 
     }
 
-    public getPath(userInput: string): string {
+    public getPath(userInput: string): {path: string, lineNumber: number | null} {
 
-        return userInput.substr(userInput.indexOf(" ") + 1);
+        const lastItem = userInput.split(" ").pop(),
+            lineNumber = Number.isInteger(Number(lastItem)) ? Number(lastItem) : null;
+
+        return {
+            path: userInput.substr(userInput.indexOf(" ") + 1),
+            lineNumber
+        }
 
     }
 

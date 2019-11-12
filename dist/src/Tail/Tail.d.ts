@@ -1,6 +1,6 @@
 import Helpers from "../HelperMethods/HelperMethods";
-export default class Cat {
+export default class Tail {
     private helpers;
     constructor(helpers: Helpers);
-    exec(fullPath: string): Promise<any>;
+    exec(fullPath: string, lines: number): Promise<any>;
 }
