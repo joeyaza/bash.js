@@ -6,6 +6,16 @@ const helperMethods = new HelperMethods(),
     cat = new Cat(helperMethods),
     helpersDoneSpy = jest.spyOn(helperMethods, "done");
 
+let readFileSpy;
+
+beforeEach(() => {
+
+    jest.mock("fs");
+
+    readFileSpy = jest.spyOn(fs, "readFile");
+
+});
+
 describe("Cat", () => {
 
     describe("when asked to execute command", () => {
@@ -14,8 +24,25 @@ describe("Cat", () => {
 
             await cat.exec("index.ts");
 
-            expect(helpersDoneSpy.mock.calls[0][0]).toBeInstanceOf(Buffer);
+            const outputData = readFileSpy.mock.calls[0][0];
+
+            expect(typeof outputData).toBe('string');
+            expect(outputData).toEqual("index.ts");
         
+        });
+
+        it("should return error when errored", async () => {
+
+            try {
+
+                await cat.exec("something incorrect");
+
+            } catch(error) {
+
+                expect(error.message).toContain("ENOENT: no such file or directory");
+
+            }
+
         });
 
     });

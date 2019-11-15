@@ -10,7 +10,7 @@ class Tail {
             fs.readFile(fullPath, (err, data) => {
                 if (err)
                     return reject(err);
-                const text = data.toString("utf8"), slicedText = text.split('\n').slice(-lines).join("\n"), bufferText = Buffer.from(slicedText, "utf8");
+                const text = data.toString("utf8"), slicedText = text.split('\n').slice(-lines || 10).join("\n"), bufferText = Buffer.from(slicedText, "utf8");
                 resolve(this.helpers.done(bufferText));
             });
         });

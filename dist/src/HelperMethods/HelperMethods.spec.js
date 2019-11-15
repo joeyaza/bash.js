@@ -9,10 +9,13 @@ describe("HelperMethods", () => {
             expect(command).toEqual("Echo");
         });
     });
-    describe("when asked to get path from input", () => {
-        it("should return path", () => {
+    describe("when asked to get path and line numbers from input", () => {
+        it("should return path and line numers", () => {
             const path = helperMethods.getPath("echo hello world");
-            expect(path).toEqual("hello world");
+            expect(path).toEqual({
+                lineNumber: null,
+                path: "hello world"
+            });
         });
     });
     describe("when asked to output the result of command to the command line", () => {

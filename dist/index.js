@@ -13,16 +13,19 @@ const HelperMethods_1 = require("./src/HelperMethods/HelperMethods");
 const Echo_1 = require("./src/Echo/Echo");
 const Cat_1 = require("./src/Cat/Cat");
 const Head_1 = require("./src/Head/Head");
+const Tail_1 = require("./src/Tail/Tail");
 const cmdMap = {
     Echo: Echo_1.default,
     Cat: Cat_1.default,
-    Head: Head_1.default
+    Head: Head_1.default,
+    Tail: Tail_1.default
 };
 const helpers = new HelperMethods_1.default();
 process.stdout.write('prompt > ');
 process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, function* () {
-    const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr), cmdExec = new cmdMap[userCmd](helpers);
+    const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr);
     try {
+        const cmdExec = new cmdMap[userCmd](helpers);
         yield cmdExec.exec(path, lineNumber);
     }
     catch (error) {

@@ -17,13 +17,16 @@ describe("HelperMethods", () => {
 
     });
 
-    describe("when asked to get path from input", () => {
+    describe("when asked to get path and line numbers from input", () => {
 
-        it("should return path", () => {
+        it("should return path and line numers", () => {
 
             const path = helperMethods.getPath("echo hello world");
 
-            expect(path).toEqual("hello world");
+            expect(path).toEqual({
+                lineNumber: null,
+                path: "hello world"
+            });
 
         });
 

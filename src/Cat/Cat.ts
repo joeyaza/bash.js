@@ -16,7 +16,7 @@ export default class Cat {
 
                 if (err) return reject(err);
     
-                resolve(this.helpers.done(data));
+                resolve(this.helpers.done(data.toString()));
     
             });
 

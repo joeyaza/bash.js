@@ -21,16 +21,17 @@ class HelperMethods implements Helpers {
     public getPath(userInput: string): {path: string, lineNumber: number | null} {
 
         const lastItem = userInput.split(" ").pop(),
-            lineNumber = Number.isInteger(Number(lastItem)) ? Number(lastItem) : null;
+            lineNumber = Number.isInteger(Number(lastItem)) ? Number(lastItem) : null,
+            path = (lineNumber) ? userInput.split(" ")[1] : userInput.substr(userInput.indexOf(" ") + 1);
 
         return {
-            path: userInput.substr(userInput.indexOf(" ") + 1),
+            path,
             lineNumber
         }
 
     }
 
-    public done(output: any): void {
+    public done(output: string | Buffer): void {
 
         process.stdout.write(output);
 
