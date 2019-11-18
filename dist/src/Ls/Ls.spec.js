@@ -9,42 +9,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Head_1 = require("./Head");
+const Ls_1 = require("./Ls");
 const HelperMethods_mock_1 = require("../HelperMethods/HelperMethods.mock");
 const fs = require("fs");
-const helperMethods = new HelperMethods_mock_1.default(), head = new Head_1.default(helperMethods), helpersDoneSpy = jest.spyOn(helperMethods, "done");
-let readFileSpy;
+const helperMethods = new HelperMethods_mock_1.default(), ls = new Ls_1.default(helperMethods), helpersDoneSpy = jest.spyOn(helperMethods, "done");
+let readdirSpy;
 beforeEach(() => {
     jest.mock("fs");
-    readFileSpy = jest.spyOn(fs, "readFile");
+    readdirSpy = jest.spyOn(fs, "readdir");
     jest.clearAllMocks();
 });
-describe("Head", () => {
-    describe("when asked to execute command with number of lines", () => {
-        it("should print the the correct number of lines of file", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield head.exec("index.ts", 20);
-            const outputData = helpersDoneSpy.mock.calls[0][0], stringLines = (outputData.match(/\n/g) || '').length + 1;
-            expect(readFileSpy.mock.calls[0][0]).toBe("index.ts");
+describe("Ls", () => {
+    describe("when asked to execute command without a directory", () => {
+        it("should print the the correct directory files/ folders", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield ls.exec();
+            const outputData = helpersDoneSpy.mock.calls[0][0], currentDir = process.cwd();
+            expect(readdirSpy.mock.calls[0][0]).toBe(currentDir);
             expect(typeof outputData).toBe('string');
-            expect(stringLines).toEqual(20);
         }));
     });
-    describe("when asked to execute command as default", () => {
-        it("should print the the correct number of lines of file", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield head.exec("index.ts", null);
-            const outputData = helpersDoneSpy.mock.calls[0][0], stringLines = (outputData.match(/\n/g) || '').length + 1;
-            expect(readFileSpy.mock.calls[0][0]).toBe("index.ts");
+    describe("when asked to execute command with a directory", () => {
+        it("should print the the correct directory files/ folders", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield ls.exec("src");
+            const outputData = helpersDoneSpy.mock.calls[0][0];
+            expect(readdirSpy.mock.calls[0][0]).toBe("src");
             expect(typeof outputData).toBe('string');
-            expect(stringLines).toEqual(10);
         }));
     });
     it("should return error when errored", () => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            yield head.exec("something incorrect", null);
+            yield ls.exec("something incorrect");
         }
         catch (error) {
             expect(error.message).toContain("ENOENT: no such file or directory");
         }
     }));
 });
-//# sourceMappingURL=Head.spec.js.map
+//# sourceMappingURL=Ls.spec.js.map

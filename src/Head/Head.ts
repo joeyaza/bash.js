@@ -16,11 +16,10 @@ export default class Head {
                 if (err) return reject(err);
 
                 const text = data.toString("utf8"),
-                    linesToRemove = lines || 10,
-                    slicedText = text.split('\n').slice(0, linesToRemove).join("\n"),
-                    outputText = Buffer.from(slicedText, "utf8").toString();
+                    linesToShow = lines || 10,
+                    slicedText = text.split('\n').slice(0, linesToShow).join("\n");
     
-                resolve(this.helpers.done(outputText));
+                resolve(this.helpers.done(slicedText));
     
             });
 

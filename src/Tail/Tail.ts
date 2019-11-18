@@ -17,10 +17,10 @@ export default class Tail {
                 if (err) return reject(err);
 
                 const text = data.toString("utf8"),
-                    slicedText = text.split('\n').slice(-lines || 10).join("\n"),
-                    bufferText = Buffer.from(slicedText, "utf8");
+                    linesToShow = lines || 10,
+                    slicedText = text.split('\n').slice(- linesToShow).join("\n");
     
-                resolve(this.helpers.done(bufferText));
+                resolve(this.helpers.done(slicedText));
     
             });
 

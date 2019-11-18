@@ -3,17 +3,19 @@ import Echo from "./src/Echo/Echo";
 import Cat from "./src/Cat/Cat";
 import Head from "./src/Head/Head";
 import Tail from "./src/Tail/Tail";
+import Ls from "./src/Ls/Ls";
 
 const cmdMap = {
     Echo,
     Cat,
     Head,
-    Tail
+    Tail,
+    Ls
 }
 
 export interface ICommand {
 
-    exec: (string, number?) => void
+    exec: (string?, number?) => void
 
 }
 

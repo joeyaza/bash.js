@@ -7,6 +7,8 @@ class HelperMethods {
         return userCmd.charAt(0).toUpperCase() + userCmd.slice(1);
     }
     getPath(userInput) {
+        if (userInput.split(" ").length === 1)
+            return {};
         const lastItem = userInput.split(" ").pop(), lineNumber = Number.isInteger(Number(lastItem)) ? Number(lastItem) : null, path = (lineNumber) ? userInput.split(" ")[1] : userInput.substr(userInput.indexOf(" ") + 1);
         return {
             path,

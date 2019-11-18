@@ -18,7 +18,9 @@ class HelperMethods implements Helpers {
 
     }
 
-    public getPath(userInput: string): {path: string, lineNumber: number | null} {
+    public getPath(userInput: string): {path?: string, lineNumber?: number | null} {
+
+        if (userInput.split(" ").length === 1) return {};
 
         const lastItem = userInput.split(" ").pop(),
             lineNumber = Number.isInteger(Number(lastItem)) ? Number(lastItem) : null,
@@ -31,7 +33,7 @@ class HelperMethods implements Helpers {
 
     }
 
-    public done(output: string | Buffer): void {
+    public done(output: any): void {
 
         process.stdout.write(output);
 

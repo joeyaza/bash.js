@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export interface Helpers {
     getCmd: (string: any) => string;
     getPath: (string: any) => {};
@@ -8,9 +7,9 @@ declare class HelperMethods implements Helpers {
     constructor();
     getCmd(userInput: string): string;
     getPath(userInput: string): {
-        path: string;
-        lineNumber: number | null;
+        path?: string;
+        lineNumber?: number | null;
     };
-    done(output: string | Buffer): void;
+    done(output: any): void;
 }
 export default HelperMethods;

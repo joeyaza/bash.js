@@ -29,6 +29,7 @@ describe("Head", () => {
             const outputData = helpersDoneSpy.mock.calls[0][0],
                 stringLines = (outputData.match(/\n/g) || '').length + 1;
 
+            expect(readFileSpy.mock.calls[0][0]).toBe("index.ts");
             expect(typeof outputData).toBe('string');
             expect(stringLines).toEqual(20);
 
@@ -45,10 +46,25 @@ describe("Head", () => {
             const outputData = helpersDoneSpy.mock.calls[0][0],
                 stringLines = (outputData.match(/\n/g) || '').length + 1;
 
+            expect(readFileSpy.mock.calls[0][0]).toBe("index.ts");
             expect(typeof outputData).toBe('string');
             expect(stringLines).toEqual(10);
 
         });
+
+    });
+
+    it("should return error when errored", async () => {
+
+        try {
+
+            await head.exec("something incorrect", null);
+
+        } catch(error) {
+
+            expect(error.message).toContain("ENOENT: no such file or directory");
+
+        }
 
     });
 
