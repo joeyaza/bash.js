@@ -12,7 +12,7 @@ class HelperMethods implements Helpers {
 
     public getCmd(userInput: string): string {
         
-        const userCmd = userInput.split(" ")[0];
+        const userCmd: string = userInput.split(" ")[0];
 
         return userCmd.charAt(0).toUpperCase() + userCmd.slice(1);
 
@@ -33,7 +33,7 @@ class HelperMethods implements Helpers {
 
     }
 
-    public done(output: any): void {
+    public done(output: string): void {
 
         process.stdout.write(output);
 

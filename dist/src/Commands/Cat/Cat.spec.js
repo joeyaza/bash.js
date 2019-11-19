@@ -17,13 +17,14 @@ let readFileSpy;
 beforeEach(() => {
     jest.mock("fs");
     readFileSpy = jest.spyOn(fs, "readFile");
+    jest.clearAllMocks();
 });
 describe("Cat", () => {
     describe("when asked to execute command", () => {
         it("should read required file and pass contents to command line", () => __awaiter(void 0, void 0, void 0, function* () {
             yield cat.exec("index.ts");
             const outputData = readFileSpy.mock.calls[0][0];
-            expect(typeof outputData).toBe('string');
+            expect(typeof outputData).toBe("string");
             expect(outputData).toEqual("index.ts");
         }));
         it("should return error when errored", () => __awaiter(void 0, void 0, void 0, function* () {

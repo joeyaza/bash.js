@@ -14,6 +14,8 @@ beforeEach(() => {
 
     readFileSpy = jest.spyOn(fs, "readFile");
 
+    jest.clearAllMocks();
+
 });
 
 describe("Cat", () => {
@@ -26,7 +28,7 @@ describe("Cat", () => {
 
             const outputData = readFileSpy.mock.calls[0][0];
 
-            expect(typeof outputData).toBe('string');
+            expect(typeof outputData).toBe("string");
             expect(outputData).toEqual("index.ts");
         
         });
