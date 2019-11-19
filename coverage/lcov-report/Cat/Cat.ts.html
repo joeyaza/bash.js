@@ -57,80 +57,35 @@
 <a name='L9'></a><a href='#L9'>9</a>
 <a name='L10'></a><a href='#L10'>10</a>
 <a name='L11'></a><a href='#L11'>11</a>
-<a name='L12'></a><a href='#L12'>12</a>
-<a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Helpers from "../HelperMethods/HelperMethods";
-import * as fs from "fs";
-&nbsp;
-export default class Cat {
-&nbsp;
-    constructor(private helpers: Helpers) {
-&nbsp;
-&nbsp;
-    }
-&nbsp;
-    public exec(fullPath: string): Promise&lt;any&gt; {
-&nbsp;
-        return new Promise((resolve, reject) =&gt; {
-&nbsp;
-            fs.readFile(fullPath, (err, data) =&gt; {
-&nbsp;
-                if (err) return reject(err);
-    
-                resolve(this.helpers.done(data.toString()));
-    
-            });
-&nbsp;
-        });
-         
-    } 
-&nbsp;
-}</pre></td></tr>
+<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span></td><td class="text"><pre class="prettyprint lang-js">ENOENT: no such file or directory, open 'C:\Users\jazadehd\Documents\Development\bash-js\src\Cat\Cat.ts'
+Error: ENOENT: no such file or directory, open 'C:\Users\jazadehd\Documents\Development\bash-js\src\Cat\Cat.ts'
+    at Object.openSync (fs.js:440:3)
+    at Object.readFileSync (fs.js:342:35)
+    at Context.sourceFinder (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-lib-source-maps\lib\map-store.js:109:27)
+    at Context.getSource (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-lib-report\lib\context.js:78:17)
+    at Object.annotateSourceCode (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-reports\lib\html\annotator.js:217:40)
+    at HtmlReport.onDetail (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-reports\lib\html\index.js:265:27)
+    at LcovReport.<computed> [as onDetail] (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-reports\lib\lcov\index.js:23:23)
+    at Visitor.<computed> [as onDetail] (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-lib-report\lib\tree.js:34:30)
+    at ReportNode.Node.visit (C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-lib-report\lib\tree.js:114:17)
+    at C:\Users\jazadehd\Documents\Development\bash-js\node_modules\istanbul-lib-report\lib\tree.js:118:15</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Nov 18 2019 14:31:36 GMT+0100 (GMT+01:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 19 2019 15:04:53 GMT+0100 (GMT+01:00)
 </div>
 </div>
 <script src="..\prettify.js"></script>

@@ -1,9 +1,9 @@
 import HelperMethods from "./src/HelperMethods/HelperMethods";
-import Echo from "./src/Echo/Echo";
-import Cat from "./src/Cat/Cat";
-import Head from "./src/Head/Head";
-import Tail from "./src/Tail/Tail";
-import Ls from "./src/Ls/Ls";
+import Echo from "./src/Commands/Echo/Echo";
+import Cat from "./src/Commands/Cat/Cat";
+import Head from "./src/Commands/Head/Head";
+import Tail from "./src/Commands/Tail/Tail";
+import Ls from "./src/Commands/Ls/Ls";
 
 const cmdMap = {
     Echo,

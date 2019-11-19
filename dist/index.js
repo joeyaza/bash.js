@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const HelperMethods_1 = require("./src/HelperMethods/HelperMethods");
-const Echo_1 = require("./src/Echo/Echo");
-const Cat_1 = require("./src/Cat/Cat");
-const Head_1 = require("./src/Head/Head");
-const Tail_1 = require("./src/Tail/Tail");
-const Ls_1 = require("./src/Ls/Ls");
+const Echo_1 = require("./src/Commands/Echo/Echo");
+const Cat_1 = require("./src/Commands/Cat/Cat");
+const Head_1 = require("./src/Commands/Head/Head");
+const Tail_1 = require("./src/Commands/Tail/Tail");
+const Ls_1 = require("./src/Commands/Ls/Ls");
 const cmdMap = {
     Echo: Echo_1.default,
     Cat: Cat_1.default,
