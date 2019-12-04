@@ -10,24 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const HelperMethods_1 = require("./src/HelperMethods/HelperMethods");
-const Echo_1 = require("./src/Commands/Echo/Echo");
-const Cat_1 = require("./src/Commands/Cat/Cat");
-const Head_1 = require("./src/Commands/Head/Head");
-const Tail_1 = require("./src/Commands/Tail/Tail");
-const Ls_1 = require("./src/Commands/Ls/Ls");
-const cmdMap = {
-    Echo: Echo_1.default,
-    Cat: Cat_1.default,
-    Head: Head_1.default,
-    Tail: Tail_1.default,
-    Ls: Ls_1.default
-};
+exports.historySource = {};
 const helpers = new HelperMethods_1.default();
+let historyNumber = 1;
 process.stdout.write('prompt > ');
 process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, function* () {
     const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr);
+    exports.historySource[historyNumber] = userCmd;
+    historyNumber++;
     try {
-        const cmdExec = new cmdMap[userCmd](helpers);
+        const { default: command } = yield Promise.resolve().then(() => require(`./src/Commands/${userCmd}/${userCmd}`)), cmdExec = new command(helpers);
         yield cmdExec.exec(path, lineNumber);
     }
     catch (error) {

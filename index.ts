@@ -1,17 +1,19 @@
 import HelperMethods from "./src/HelperMethods/HelperMethods";
-import Echo from "./src/Commands/Echo/Echo";
-import Cat from "./src/Commands/Cat/Cat";
-import Head from "./src/Commands/Head/Head";
-import Tail from "./src/Commands/Tail/Tail";
-import Ls from "./src/Commands/Ls/Ls";
+// import Echo from "./src/Commands/Echo/Echo";
+// import Cat from "./src/Commands/Cat/Cat";
+// import Head from "./src/Commands/Head/Head";
+// import Tail from "./src/Commands/Tail/Tail";
+// import Ls from "./src/Commands/Ls/Ls";
+// import Pwd from "./src/Commands/Pwd/Pwd";
 
-const cmdMap = {
-    Echo,
-    Cat,
-    Head,
-    Tail,
-    Ls
-}
+// const cmdMap = {
+//     Echo,
+    // Cat,
+//     Head,
+//     Tail,
+//     Ls,
+//     Pwd
+// }
 
 export interface ICommand {
 
@@ -19,7 +21,11 @@ export interface ICommand {
 
 }
 
+export const historySource = {};
+
 const helpers = new HelperMethods();
+
+let historyNumber = 1;
 
 process.stdout.write('prompt > ');
       
@@ -30,9 +36,15 @@ process.stdin.on('data', async (userInput) => {
         userCmd: string = helpers.getCmd(userInputStr).toString(),
         {path, lineNumber} = helpers.getPath(userInputStr);
 
+        historySource[historyNumber] = userCmd;
+
+        historyNumber ++;
+
         try {
 
-            const cmdExec: ICommand = new cmdMap[userCmd](helpers);
+            const {default: command} = await import(`./src/Commands/${userCmd}/${userCmd}`),
+                   cmdExec: ICommand = new command(helpers);
+
             await cmdExec.exec(path, lineNumber);
 
         } catch(error) {
