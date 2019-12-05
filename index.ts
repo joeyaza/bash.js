@@ -1,25 +1,13 @@
 import HelperMethods from "./src/HelperMethods/HelperMethods";
-// import Echo from "./src/Commands/Echo/Echo";
-// import Cat from "./src/Commands/Cat/Cat";
-// import Head from "./src/Commands/Head/Head";
-// import Tail from "./src/Commands/Tail/Tail";
-// import Ls from "./src/Commands/Ls/Ls";
-// import Pwd from "./src/Commands/Pwd/Pwd";
-
-// const cmdMap = {
-//     Echo,
-    // Cat,
-//     Head,
-//     Tail,
-//     Ls,
-//     Pwd
-// }
+import * as NodeCache from "node-cache";
 
 export interface ICommand {
 
     exec: (string?, number?) => void
 
 }
+
+const nodeCache: NodeCache = new NodeCache(); 
 
 export const historySource = {};
 

@@ -21,8 +21,6 @@ describe("History", () => {
 
             const outputData = helpersDoneSpy.mock.calls[0][0];
 
-            console.log(">>>>", outputData);
-
             expect(typeof outputData).toBe('string');
 
         });
