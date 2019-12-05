@@ -22,14 +22,14 @@ process.stdin.on('data', async (userInput) => {
         {path, lineNumber} = helpers.getPath(userInputStr),
         historySourceNumber: number = await historySource.getLastCommand();
 
-        await historySource.setHistory({[historySourceNumber + 1]: userCmd});
-
         try {
 
             const {default: command} = await import(`./src/Commands/${userCmd}/${userCmd}`),
-                   cmdExec: ICommand = new command(helpers);
+                   cmdExec: ICommand = new command(helpers, historySource);
 
             await cmdExec.exec(path, lineNumber);
+
+            if (userCmd) await historySource.setHistory({[historySourceNumber + 1]: userCmd});
 
         } catch(error) {
 

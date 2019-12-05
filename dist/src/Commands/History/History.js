@@ -15,10 +15,13 @@ class History {
         this.historySource = historySource;
     }
     exec() {
-        console.log("here ! 1234>", this.helperMethods, this.historySource);
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const cmdHistory = yield this.historySource.getHistory();
-            resolve(this.helperMethods.done(cmdHistory));
+            let dirStr = "";
+            for (let [key, value] of Object.entries(cmdHistory)) {
+                dirStr = ` ${dirStr}\n${key} ${value}`;
+            }
+            resolve(this.helperMethods.done(dirStr));
         }));
     }
 }

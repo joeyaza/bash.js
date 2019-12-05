@@ -4,10 +4,7 @@ class HistorySource {
 
     private fileName = "history";
 
-    public constructor() {
-
-
-    }
+    constructor() {}
 
     public setHistory(cmd: {[key: number]: string}) {
 

@@ -12,13 +12,19 @@ export default class History implements ICommand {
 
     public exec(): Promise<any> {
 
-        console.log("here ! 1234>", this.helperMethods, this.historySource);
-
         return new Promise( async (resolve) => {
 
-            const cmdHistory = await this.historySource.getHistory()
-            
-            resolve(this.helperMethods.done(cmdHistory));
+            const cmdHistory = await this.historySource.getHistory();
+
+            let dirStr = "";
+
+            for (let [key, value] of Object.entries(cmdHistory)) {
+
+                dirStr = ` ${dirStr}\n${key} ${value}`;
+
+            }
+
+            resolve(this.helperMethods.done(dirStr));
 
         });
          

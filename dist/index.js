@@ -15,10 +15,11 @@ const helpers = new HelperMethods_1.default(), historySource = new HistorySource
 process.stdout.write('prompt > ');
 process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, function* () {
     const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr), historySourceNumber = yield historySource.getLastCommand();
-    yield historySource.setHistory({ [historySourceNumber + 1]: userCmd });
     try {
-        const { default: command } = yield Promise.resolve().then(() => require(`./src/Commands/${userCmd}/${userCmd}`)), cmdExec = new command(helpers);
+        const { default: command } = yield Promise.resolve().then(() => require(`./src/Commands/${userCmd}/${userCmd}`)), cmdExec = new command(helpers, historySource);
         yield cmdExec.exec(path, lineNumber);
+        if (userCmd)
+            yield historySource.setHistory({ [historySourceNumber + 1]: userCmd });
     }
     catch (error) {
         console.log(error.message);
