@@ -1,26 +1,24 @@
-import Helpers from "../../HelperMethods/HelperMethods";
-import {ICommand, historySource} from "../../../index";
+import HelperMethods from "../../HelperMethods/HelperMethods";
+import {ICommand} from "../../../index";
+import HistorySource from "../../HistorySource/HistorySource";
 
 export default class History implements ICommand {
 
-    constructor(private helpers: Helpers) {
+    constructor(private helperMethods: HelperMethods, 
+                private historySource: HistorySource) {
 
 
     }
 
     public exec(): Promise<any> {
 
-        return new Promise((resolve) => {
+        console.log("here ! 1234>", this.helperMethods, this.historySource);
 
-            let dirStr = "";
+        return new Promise( async (resolve) => {
 
-            for (let [key, value] of Object.entries(historySource)) {
-
-                dirStr = `${dirStr}\n${key} ${value}`;
-
-            }
-
-            resolve(this.helpers.done(dirStr));
+            const cmdHistory = await this.historySource.getHistory()
+            
+            resolve(this.helperMethods.done(cmdHistory));
 
         });
          

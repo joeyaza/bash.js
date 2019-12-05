@@ -1,5 +1,6 @@
 import HelperMethods from "./src/HelperMethods/HelperMethods";
-import * as NodeCache from "node-cache";
+import HistorySource from "./src/HistorySource/HistorySource";
+
 
 export interface ICommand {
 
@@ -7,13 +8,9 @@ export interface ICommand {
 
 }
 
-const nodeCache: NodeCache = new NodeCache(); 
 
-export const historySource = {};
-
-const helpers = new HelperMethods();
-
-let historyNumber = 1;
+const helpers = new HelperMethods(),
+      historySource = new HistorySource();
 
 process.stdout.write('prompt > ');
       
@@ -22,11 +19,10 @@ process.stdin.on('data', async (userInput) => {
 
     const userInputStr = userInput.toString().trim(),
         userCmd: string = helpers.getCmd(userInputStr).toString(),
-        {path, lineNumber} = helpers.getPath(userInputStr);
+        {path, lineNumber} = helpers.getPath(userInputStr),
+        historySourceNumber: number = await historySource.getLastCommand();
 
-        historySource[historyNumber] = userCmd;
-
-        historyNumber ++;
+        await historySource.setHistory({[historySourceNumber + 1]: userCmd});
 
         try {
 

@@ -10,14 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const HelperMethods_1 = require("./src/HelperMethods/HelperMethods");
-exports.historySource = {};
-const helpers = new HelperMethods_1.default();
-let historyNumber = 1;
+const HistorySource_1 = require("./src/HistorySource/HistorySource");
+const helpers = new HelperMethods_1.default(), historySource = new HistorySource_1.default();
 process.stdout.write('prompt > ');
 process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, function* () {
-    const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr);
-    exports.historySource[historyNumber] = userCmd;
-    historyNumber++;
+    const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr), historySourceNumber = yield historySource.getLastCommand();
+    yield historySource.setHistory({ [historySourceNumber + 1]: userCmd });
     try {
         const { default: command } = yield Promise.resolve().then(() => require(`./src/Commands/${userCmd}/${userCmd}`)), cmdExec = new command(helpers);
         yield cmdExec.exec(path, lineNumber);
