@@ -6,7 +6,7 @@ declare class HistorySource {
     }): void;
     getHistory(): Promise<any>;
     getLastCommand(): Promise<number>;
-    private get;
-    private set;
+    private getHistoryFile;
+    private setHistoryFile;
 }
 export default HistorySource;

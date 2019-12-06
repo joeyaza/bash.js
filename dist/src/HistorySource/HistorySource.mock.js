@@ -9,20 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const HistorySource_1 = require("./HistorySource");
-const historySource = new HistorySource_1.default();
-describe("HistorySource", () => {
-    describe("when asked to get the last command number", () => {
-        describe("when history file exists", () => {
-            it("should return number of last command entry", () => __awaiter(void 0, void 0, void 0, function* () {
-                const result = yield historySource.getLastCommand();
-                console.log(">>>>>>>>>>>>>>>>>>>>>", result);
-            }));
-        });
-        describe("when history file does not exist", () => {
-            it("should return number 0", () => {
+class HistorySourceMock {
+    constructor() { }
+    setHistory() {
+    }
+    getHistory() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return Promise.resolve({ '8': 'Ls',
+                '9': 'History',
+                '10': 'Ls',
+                '11': 'History',
+                '12': 'Ls'
             });
         });
-    });
-});
-//# sourceMappingURL=HistorySource.spec.js.map
+    }
+    getLastCommand() {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+}
+exports.default = HistorySourceMock;
+//# sourceMappingURL=HistorySource.mock.js.map

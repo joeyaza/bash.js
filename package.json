@@ -15,7 +15,6 @@
     "@types/jest": "^24.0.22",
     "@types/node": "^12.12.5",
     "jest": "^24.9.0",
-    "node-cache": "^5.0.2",
     "typescript": "^3.6.4"
   },
   "jest": {

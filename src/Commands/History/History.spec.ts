@@ -1,31 +1,43 @@
-// import History from "./History";
-// import HelperMethods from "../../HelperMethods/HelperMethods.mock";
-// import 
+import History from "./History";
+import HelperMethods from "../../HelperMethods/HelperMethods.mock";
+import HistorySource from "../../HistorySource/HistorySource.mock";
 
-// const helperMethods = new HelperMethods(),
-//     history = new History(helperMethods),
-//     helpersDoneSpy = jest.spyOn(helperMethods, "done");
+const helperMethods = new HelperMethods(),
+      historySource = new HistorySource(),
+      history = new History(helperMethods, historySource),
+      helpersDoneSpy = jest.spyOn(helperMethods, "done"),
+      getHistorySpy = jest.spyOn(historySource, "getHistory");
 
-// beforeEach(() => {
 
-//     jest.clearAllMocks();
+beforeEach(() => {
 
-// });
+    jest.clearAllMocks();
 
-// describe("History", () => {
+});
 
-//     describe("when asked to execute command", () => {
+describe("History", () => {
 
-//         it("should print the the command line history", async () => {
+    describe("when asked to execute command", () => {
 
-//             await history.exec();
+        it("should get command history source", async () => {
 
-//             const outputData = helpersDoneSpy.mock.calls[0][0];
+            await history.exec();
 
-//             expect(typeof outputData).toBe('string');
+            expect(getHistorySpy).toHaveBeenCalledTimes(1);
 
-//         });
+        });
 
-//     });
 
-// });
+        it("should print the the command line history", async () => {
+
+            await history.exec();
+
+            const outputData = helpersDoneSpy.mock.calls[0][0];
+
+            expect(typeof outputData).toBe('string');
+
+        });
+
+    });
+
+});

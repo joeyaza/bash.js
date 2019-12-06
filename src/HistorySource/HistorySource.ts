@@ -10,20 +10,20 @@ class HistorySource {
 
         fs.exists(this.fileName, async (exists: boolean) => {
 
+            let historySourceToSet = JSON.stringify(cmd);
+
             if (exists) {
 
-                const data: string = await this.get(),
+                const data: string = await this.getHistoryFile(),
                         currentHistorySourceObj = JSON.parse(data.toString());
 
                 currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
 
-                await this.set(JSON.stringify(currentHistorySourceObj));
-
-                return;
+                historySourceToSet = JSON.stringify(currentHistorySourceObj);
 
             }
 
-            await this.set(JSON.stringify(cmd));
+            await this.setHistoryFile(historySourceToSet);
 
         }); 
 
@@ -31,7 +31,7 @@ class HistorySource {
 
     public async getHistory(): Promise<any> {
 
-        const data: string = await this.get(),
+        const data: string = await this.getHistoryFile(),
               currentHistorySourceObj = JSON.parse(data.toString());
 
         return currentHistorySourceObj;
@@ -42,9 +42,9 @@ class HistorySource {
 
         try {
 
-            const data = await this.get(),
-            currentHistorySourceObj = JSON.parse(data.toString()),
-            currentHistoryKeys = Object.keys(currentHistorySourceObj);
+            const data = await this.getHistoryFile(),
+                  currentHistorySourceObj = JSON.parse(data.toString()),
+                  currentHistoryKeys = Object.keys(currentHistorySourceObj);
 
             return Number(currentHistoryKeys[currentHistoryKeys.length - 1]);
 
@@ -56,7 +56,7 @@ class HistorySource {
 
     }
 
-    private get(): Promise<any> {
+    private getHistoryFile(): Promise<any> {
 
         return new Promise((resolve, reject) => {
 
@@ -73,7 +73,7 @@ class HistorySource {
     }
 
 
-    private set(cmd): Promise<any> {
+    private setHistoryFile(cmd): Promise<any> {
 
         return new Promise((resolve, reject) => {
 
