@@ -22,20 +22,22 @@ process.stdin.on('data', async (userInput) => {
         {path, lineNumber} = helpers.getPath(userInputStr),
         historySourceNumber: number = await historySource.getLastCommand();
 
-        try {
+    try {
 
-            const {default: command} = await import(`./src/Commands/${userCmd}/${userCmd}`),
-                   cmdExec: ICommand = new command(helpers, historySource);
+        const {default: command} = await import(`./src/Commands/${userCmd}/${userCmd}`),
+                cmdExec: ICommand = new command(helpers, historySource);
 
-            await cmdExec.exec(path, lineNumber);
+        await cmdExec.exec(path, lineNumber);
 
-            if (userCmd) await historySource.setHistory({[historySourceNumber + 1]: userCmd});
+        if (userCmd) await historySource.setHistory({[historySourceNumber + 1]: userCmd});
 
-        } catch(error) {
+    } catch(error) {
 
-            console.log(error.message);
-            process.stdout.write('\nprompt > ');
+    console.warn('It doesnt look like the command you mentioned exists...' 
+                + 'in any case take a look at the below error message');
+        console.error(error.message);
+        process.stdout.write('\nprompt > ');
 
-        }
+    }
 
 }); 

@@ -17,8 +17,9 @@ class HistorySource {
     setHistory(cmd) {
         fs.exists(this.fileName, (exists) => __awaiter(this, void 0, void 0, function* () {
             let historySourceToSet = JSON.stringify(cmd);
-            if (exists) {
-                const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data.toString());
+            const data = yield this.getHistoryFile();
+            if (exists && data) {
+                const currentHistorySourceObj = JSON.parse(data);
                 currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
                 historySourceToSet = JSON.stringify(currentHistorySourceObj);
             }
@@ -27,14 +28,14 @@ class HistorySource {
     }
     getHistory() {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data.toString());
+            const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
             return currentHistorySourceObj;
         });
     }
     getLastCommand() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data.toString()), currentHistoryKeys = Object.keys(currentHistorySourceObj);
+                const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data), currentHistoryKeys = Object.keys(currentHistorySourceObj);
                 return Number(currentHistoryKeys[currentHistoryKeys.length - 1]);
             }
             catch (_a) {

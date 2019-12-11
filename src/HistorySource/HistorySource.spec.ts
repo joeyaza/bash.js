@@ -3,7 +3,9 @@ import * as fs from "fs";
 
 jest.mock("fs");
 
-const historySource: HistorySource = new HistorySource();
+const historySource: HistorySource = new HistorySource(),
+      readFileSpy = jest.spyOn(fs, "readFile"),
+      fileExistsSpy = jest.spyOn(fs, "exists");
 
 describe("HistorySource", () => {
 
@@ -13,6 +15,9 @@ describe("HistorySource", () => {
 
             it("should return number of last command entry", async () => {
 
+                const lastCommandNumber: number = await historySource.getLastCommand();
+
+                expect(lastCommandNumber).toBe(1);
 
             });
 

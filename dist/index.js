@@ -22,7 +22,9 @@ process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, functi
             yield historySource.setHistory({ [historySourceNumber + 1]: userCmd });
     }
     catch (error) {
-        console.log(error.message);
+        console.warn('It doesnt look like the command you mentioned exists...'
+            + 'in any case take a look at the below error message');
+        console.error(error.message);
         process.stdout.write('\nprompt > ');
     }
 }));

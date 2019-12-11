@@ -4,7 +4,7 @@ declare class HistorySource {
     setHistory(cmd: {
         [key: number]: string;
     }): void;
-    getHistory(): Promise<any>;
+    getHistory(): Promise<string>;
     getLastCommand(): Promise<number>;
     private getHistoryFile;
     private setHistoryFile;

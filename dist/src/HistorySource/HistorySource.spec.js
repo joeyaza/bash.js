@@ -10,13 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const HistorySource_1 = require("./HistorySource");
-const historySource = new HistorySource_1.default();
+const fs = require("fs");
+jest.mock("fs");
+const historySource = new HistorySource_1.default(), readFileSpy = jest.spyOn(fs, "readFile"), fileExistsSpy = jest.spyOn(fs, "exists");
 describe("HistorySource", () => {
     describe("when asked to get the last command number", () => {
         describe("when history file exists", () => {
             it("should return number of last command entry", () => __awaiter(void 0, void 0, void 0, function* () {
-                const result = yield historySource.getLastCommand();
-                console.log(">>>>>>>>>>>>>>>>>>>>>", result);
+                const lastCommandNumber = yield historySource.getLastCommand();
+                expect(lastCommandNumber).toBe(1);
             }));
         });
         describe("when history file does not exist", () => {
