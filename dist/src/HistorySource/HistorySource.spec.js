@@ -9,21 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+jest.mock("fs");
 const HistorySource_1 = require("./HistorySource");
 const fs = require("fs");
-jest.mock("fs");
-const historySource = new HistorySource_1.default(), readFileSpy = jest.spyOn(fs, "readFile"), fileExistsSpy = jest.spyOn(fs, "exists");
+const historySource = new HistorySource_1.default();
 describe("HistorySource", () => {
     describe("when asked to get the last command number", () => {
+        describe("when history file does not exist", () => {
+            it("should return number 0", () => __awaiter(void 0, void 0, void 0, function* () {
+                fs.readFileSync.mockReturnValue(undefined);
+                const lastCommandNumber = yield historySource.getLastCommand();
+                expect(lastCommandNumber).toBe(0);
+            }));
+        });
         describe("when history file exists", () => {
             it("should return number of last command entry", () => __awaiter(void 0, void 0, void 0, function* () {
+                fs.readFileSync.mockReturnValue(Buffer.from('{"1":"Ls"}'));
                 const lastCommandNumber = yield historySource.getLastCommand();
                 expect(lastCommandNumber).toBe(1);
             }));
-        });
-        describe("when history file does not exist", () => {
-            it("should return number 0", () => {
-            });
         });
     });
 });

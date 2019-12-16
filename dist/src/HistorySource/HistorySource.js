@@ -38,19 +38,20 @@ class HistorySource {
                 const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data), currentHistoryKeys = Object.keys(currentHistorySourceObj);
                 return Number(currentHistoryKeys[currentHistoryKeys.length - 1]);
             }
-            catch (_a) {
+            catch (error) {
+                console.log(error);
                 return 0;
             }
         });
     }
     getHistoryFile() {
-        return new Promise((resolve, reject) => {
-            fs.readFile(this.fileName, (error, data) => __awaiter(this, void 0, void 0, function* () {
-                if (error)
-                    return reject(error);
-                resolve(data.toString());
-            }));
-        });
+        try {
+            const data = fs.readFileSync(this.fileName);
+            return data.toString();
+        }
+        catch (error) {
+            throw error;
+        }
     }
     setHistoryFile(cmd) {
         return new Promise((resolve, reject) => {

@@ -30,7 +30,7 @@ class HistorySource {
 
     public async getHistory(): Promise<string> {
 
-        const data: string = await this.getHistoryFile(),
+        const data = await this.getHistoryFile(),
                 currentHistorySourceObj = JSON.parse(data);
 
         return currentHistorySourceObj;
@@ -42,12 +42,12 @@ class HistorySource {
         try {
             
             const data: string = await this.getHistoryFile(),
-                  currentHistorySourceObj = JSON.parse(data),
-                  currentHistoryKeys = Object.keys(currentHistorySourceObj);
+                  currentHistorySourceObj: object = JSON.parse(data),
+                  currentHistoryKeys: string[] = Object.keys(currentHistorySourceObj);
 
             return Number(currentHistoryKeys[currentHistoryKeys.length - 1]);
 
-        } catch {
+        } catch(error) {
 
             return 0;
 
@@ -55,24 +55,23 @@ class HistorySource {
 
     }
 
-    private getHistoryFile(): Promise<string> {
+    private getHistoryFile(): string {
 
-        return new Promise((resolve, reject) => {
+       try {
 
-            fs.readFile(this.fileName, async (error, data) => {
+            const data: Buffer = fs.readFileSync(this.fileName);
 
-                if(error) return reject(error);
+            return data.toString();
 
-                resolve(data.toString());
+       } catch(error) {
 
-            });
+            throw error;
 
-        });
+       }
 
     }
 
-
-    private setHistoryFile(cmd): Promise<any> {
+    private setHistoryFile(cmd: string): Promise<boolean> {
 
         return new Promise((resolve, reject) => {
 
