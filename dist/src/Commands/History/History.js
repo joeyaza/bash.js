@@ -18,10 +18,15 @@ class History {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const cmdHistory = yield this.historySource.getHistory();
             let dirStr = "";
-            for (let [key, value] of Object.entries(cmdHistory)) {
-                dirStr = ` ${dirStr}\n${key} ${value}`;
+            if (typeof cmdHistory === "object") {
+                for (let [key, value] of Object.entries(cmdHistory)) {
+                    dirStr = ` ${dirStr}\n${key} ${value}`;
+                }
             }
-            resolve(this.helperMethods.done(dirStr));
+            else {
+                dirStr = "No history yet! Get writing commands!!";
+            }
+            return resolve(this.helperMethods.done(dirStr));
         }));
     }
 }

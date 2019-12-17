@@ -11,11 +11,11 @@ class HistorySource {
         fs.exists(this.fileName, async (exists: boolean) => {
 
             let historySourceToSet = JSON.stringify(cmd);
-            const data: string = await this.getHistoryFile();
+            
+            if (exists) {
 
-            if (exists && data) {
-
-                const currentHistorySourceObj = JSON.parse(data);
+                const data: string = await this.getHistoryFile(),
+                      currentHistorySourceObj = JSON.parse(data);
 
                 currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
                 historySourceToSet = JSON.stringify(currentHistorySourceObj);
@@ -28,12 +28,26 @@ class HistorySource {
 
     }
 
-    public async getHistory(): Promise<string> {
+    public async getHistory(): Promise<object | undefined> {
 
-        const data = await this.getHistoryFile(),
-                currentHistorySourceObj = JSON.parse(data);
+        return new Promise((resolve) => {
 
-        return currentHistorySourceObj;
+            fs.exists(this.fileName, async (exists: boolean) => {
+
+                if (exists) {  
+    
+                    const data: string = await this.getHistoryFile(),
+                            currentHistorySourceObj: object = JSON.parse(data);
+    
+                    return resolve(currentHistorySourceObj);
+        
+                }
+    
+                resolve(undefined);
+    
+            });
+
+        });
 
     }
 
@@ -55,19 +69,19 @@ class HistorySource {
 
     }
 
-    private getHistoryFile(): string {
+    private getHistoryFile(): Promise<string> {
 
-       try {
+        return new Promise((resolve, reject) => {
 
-            const data: Buffer = fs.readFileSync(this.fileName);
+            fs.readFile(this.fileName, async (error, data) => {
 
-            return data.toString();
+                if(error) return reject(error);
 
-       } catch(error) {
+                resolve(data.toString());
 
-            throw error;
+            });
 
-       }
+        });
 
     }
 

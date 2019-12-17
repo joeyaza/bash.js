@@ -15,14 +15,22 @@ export default class History implements ICommand {
             const cmdHistory = await this.historySource.getHistory();
 
             let dirStr = "";
+            
+            if (typeof cmdHistory === "object") {
 
-            for (let [key, value] of Object.entries(cmdHistory)) {
+                for (let [key, value] of Object.entries(cmdHistory)) {
+    
+                    dirStr = ` ${dirStr}\n${key} ${value}`;
+    
+                }
 
-                dirStr = ` ${dirStr}\n${key} ${value}`;
+            } else {
+
+                dirStr = "No history yet! Get writing commands!!";
 
             }
 
-            resolve(this.helperMethods.done(dirStr));
+            return resolve(this.helperMethods.done(dirStr));
 
         });
          

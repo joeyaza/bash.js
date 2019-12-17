@@ -17,9 +17,8 @@ class HistorySource {
     setHistory(cmd) {
         fs.exists(this.fileName, (exists) => __awaiter(this, void 0, void 0, function* () {
             let historySourceToSet = JSON.stringify(cmd);
-            const data = yield this.getHistoryFile();
-            if (exists && data) {
-                const currentHistorySourceObj = JSON.parse(data);
+            if (exists) {
+                const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
                 currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
                 historySourceToSet = JSON.stringify(currentHistorySourceObj);
             }
@@ -28,8 +27,15 @@ class HistorySource {
     }
     getHistory() {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
-            return currentHistorySourceObj;
+            return new Promise((resolve) => {
+                fs.exists(this.fileName, (exists) => __awaiter(this, void 0, void 0, function* () {
+                    if (exists) {
+                        const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
+                        return resolve(currentHistorySourceObj);
+                    }
+                    resolve(undefined);
+                }));
+            });
         });
     }
     getLastCommand() {
@@ -39,19 +45,18 @@ class HistorySource {
                 return Number(currentHistoryKeys[currentHistoryKeys.length - 1]);
             }
             catch (error) {
-                console.log(error);
                 return 0;
             }
         });
     }
     getHistoryFile() {
-        try {
-            const data = fs.readFileSync(this.fileName);
-            return data.toString();
-        }
-        catch (error) {
-            throw error;
-        }
+        return new Promise((resolve, reject) => {
+            fs.readFile(this.fileName, (error, data) => __awaiter(this, void 0, void 0, function* () {
+                if (error)
+                    return reject(error);
+                resolve(data.toString());
+            }));
+        });
     }
     setHistoryFile(cmd) {
         return new Promise((resolve, reject) => {

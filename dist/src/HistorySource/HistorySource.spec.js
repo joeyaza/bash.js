@@ -14,17 +14,42 @@ const HistorySource_1 = require("./HistorySource");
 const fs = require("fs");
 const historySource = new HistorySource_1.default();
 describe("HistorySource", () => {
+    describe("when asked to get history file", () => {
+        it("should return history file when it exists", () => __awaiter(void 0, void 0, void 0, function* () {
+            fs.exists.mockImplementation((filename, callback) => {
+                callback(true);
+            });
+            fs.readFile.mockImplementation((filename, callback) => {
+                callback(undefined, Buffer.from('{"1":"Ls"}'));
+            });
+            const historyFile = yield historySource.getHistory();
+            expect(historyFile).toEqual({
+                "1": "Ls"
+            });
+        }));
+        it("should not return history file when it does not exist", () => __awaiter(void 0, void 0, void 0, function* () {
+            fs.exists.mockImplementation((filename, callback) => {
+                callback(false);
+            });
+            const historyFile = yield historySource.getHistory();
+            expect(historyFile).toEqual(undefined);
+        }));
+    });
     describe("when asked to get the last command number", () => {
         describe("when history file does not exist", () => {
             it("should return number 0", () => __awaiter(void 0, void 0, void 0, function* () {
-                fs.readFileSync.mockReturnValue(undefined);
+                fs.readFile.mockImplementation((filename, callback) => {
+                    callback(undefined, "");
+                });
                 const lastCommandNumber = yield historySource.getLastCommand();
                 expect(lastCommandNumber).toBe(0);
             }));
         });
         describe("when history file exists", () => {
             it("should return number of last command entry", () => __awaiter(void 0, void 0, void 0, function* () {
-                fs.readFileSync.mockReturnValue(Buffer.from('{"1":"Ls"}'));
+                fs.readFile.mockImplementation((filename, callback) => {
+                    callback(undefined, Buffer.from('{"1":"Ls"}'));
+                });
                 const lastCommandNumber = yield historySource.getLastCommand();
                 expect(lastCommandNumber).toBe(1);
             }));

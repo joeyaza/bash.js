@@ -1,13 +1,11 @@
 import HelperMethods from "./src/HelperMethods/HelperMethods";
 import HistorySource from "./src/HistorySource/HistorySource";
 
-
 export interface ICommand {
 
     exec: (string?, number?) => void
 
 }
-
 
 const helpers = new HelperMethods(),
       historySource = new HistorySource();
@@ -18,9 +16,9 @@ process.stdout.write('prompt > ');
 process.stdin.on('data', async (userInput) => {
 
     const userInputStr = userInput.toString().trim(),
-        userCmd: string = helpers.getCmd(userInputStr).toString(),
-        {path, lineNumber} = helpers.getPath(userInputStr),
-        historySourceNumber: number = await historySource.getLastCommand();
+          userCmd: string = helpers.getCmd(userInputStr).toString(),
+          {path, lineNumber} = helpers.getPath(userInputStr),
+          historySourceNumber: number = await historySource.getLastCommand();
 
     try {
 
