@@ -14,14 +14,7 @@ export default class Mkdir {
 
             fs.mkdir(fullPath, (err) => {
 
-                console.log("!!!!!!!!!!!!", err);
-
-                if (err) {
-                    
-                    console.log("ksdjdhkasjhdkajs");
-                    return reject(err);
-
-                }
+                if (err) return reject(err);
 
                 resolve(this.helpers.done(""));
 

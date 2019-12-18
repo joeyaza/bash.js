@@ -16,6 +16,7 @@ class HelperMethods {
         };
     }
     done(output) {
+        console.log("here !!!!!!!!!!!!!!!!!!!!!!!");
         process.stdout.write(output);
         process.stdout.write('\nprompt > ');
     }

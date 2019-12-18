@@ -35,6 +35,8 @@ class HelperMethods implements Helpers {
 
     public done(output: string): void {
 
+        console.log("here !!!!!!!!!!!!!!!!!!!!!!!");
+
         process.stdout.write(output);
 
         process.stdout.write('\nprompt > ');

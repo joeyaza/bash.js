@@ -11,9 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const HelperMethods_1 = require("./src/HelperMethods/HelperMethods");
 const HistorySource_1 = require("./src/HistorySource/HistorySource");
+const keypress = require("keypress");
 const helpers = new HelperMethods_1.default(), historySource = new HistorySource_1.default();
+let keypressChosen = false;
 process.stdout.write('prompt > ');
+keypress(process.stdin);
+process.stdin.setRawMode(true);
 process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(2, userInput.toString('utf-8'), typeof userInput.toString('utf-8'));
+    if (true) {
+    }
     const userInputStr = userInput.toString().trim(), userCmd = helpers.getCmd(userInputStr).toString(), { path, lineNumber } = helpers.getPath(userInputStr), historySourceNumber = yield historySource.getLastCommand();
     try {
         const { default: command } = yield Promise.resolve().then(() => require(`./src/Commands/${userCmd}/${userCmd}`)), cmdExec = new command(helpers, historySource);
@@ -22,9 +29,6 @@ process.stdin.on('data', (userInput) => __awaiter(void 0, void 0, void 0, functi
             yield historySource.setHistory({ [historySourceNumber + 1]: userCmd });
     }
     catch (error) {
-        console.warn('It doesnt look like the command you mentioned exists...'
-            + 'in any case take a look at the below error message');
-        console.error(error.message);
         process.stdout.write('\nprompt > ');
     }
 }));
