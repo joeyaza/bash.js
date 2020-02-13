@@ -1,9 +1,9 @@
 declare class HistorySource {
     private fileName;
-    constructor();
+    constructor(fileName: string);
     setHistory(cmd: {
         [key: number]: string;
-    }): void;
+    }): Promise<any>;
     getHistory(): Promise<object | undefined>;
     getLastCommand(): Promise<number>;
     private getHistoryFile;

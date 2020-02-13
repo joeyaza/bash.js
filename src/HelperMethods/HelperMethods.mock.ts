@@ -19,9 +19,9 @@ class HelperMethodsMock implements Helpers {
 
     }
 
-    public done(output: any): void {
+    public done(output: string): string {
 
-      
+      return output;
 
     }
 

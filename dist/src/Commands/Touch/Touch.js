@@ -9,18 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class HistorySourceMock {
-    constructor() { }
-    getHistory() {
+const fs = require("fs");
+class Touch {
+    constructor(helpers) {
+        this.helpers = helpers;
+    }
+    exec(fileNames) {
         return __awaiter(this, void 0, void 0, function* () {
-            return Promise.resolve({ '8': 'Ls',
-                '9': 'History',
-                '10': 'Ls',
-                '11': 'History',
-                '12': 'Ls'
+            const fileNamesArr = fileNames.split(" "), fileNamesCreatedArr = yield Promise.all(this.writeFiles(fileNamesArr));
+            return Promise.resolve(this.helpers.done(`File with name ${fileNamesCreatedArr.join(", ")} created!`));
+        });
+    }
+    writeFiles(fileNamesArr) {
+        return fileNamesArr.map((name) => {
+            return new Promise((resolve, reject) => {
+                fs.writeFile(name, null, (error) => {
+                    if (error)
+                        return reject(error);
+                    resolve(name);
+                });
             });
         });
     }
 }
-exports.default = HistorySourceMock;
-//# sourceMappingURL=HistorySource.mock.js.map
+exports.default = Touch;
+//# sourceMappingURL=Touch.js.map

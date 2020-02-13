@@ -6,6 +6,6 @@ declare class HelperMethodsMock implements Helpers {
         path: string;
         lineNumber: number | null;
     };
-    done(output: any): void;
+    done(output: string): string;
 }
 export default HelperMethodsMock;

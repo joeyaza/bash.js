@@ -11,31 +11,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 class HistorySource {
-    constructor() {
-        this.fileName = "history";
+    constructor(fileName) {
+        this.fileName = fileName;
+        this.fileName = fileName;
     }
     setHistory(cmd) {
-        fs.exists(this.fileName, (exists) => __awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, void 0, void 0, function* () {
             let historySourceToSet = JSON.stringify(cmd);
-            if (exists) {
+            if (fs.existsSync(this.fileName)) {
                 const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
                 currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
                 historySourceToSet = JSON.stringify(currentHistorySourceObj);
             }
-            yield this.setHistoryFile(historySourceToSet);
-        }));
+            try {
+                yield this.setHistoryFile(historySourceToSet);
+                return JSON.parse(historySourceToSet);
+            }
+            catch (error) {
+                return `Error Setting File!`;
+            }
+        });
     }
     getHistory() {
         return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve) => {
-                fs.exists(this.fileName, (exists) => __awaiter(this, void 0, void 0, function* () {
-                    if (exists) {
-                        const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
-                        return resolve(currentHistorySourceObj);
-                    }
-                    resolve(undefined);
-                }));
-            });
+            if (fs.existsSync(this.fileName)) {
+                const data = yield this.getHistoryFile(), currentHistorySourceObj = JSON.parse(data);
+                return currentHistorySourceObj;
+            }
+            return undefined;
         });
     }
     getLastCommand() {

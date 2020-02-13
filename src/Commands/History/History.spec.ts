@@ -1,3 +1,4 @@
+jest.mock("../../HistorySource/HistorySource");
 import History from "./History";
 import HelperMethods from "../../HelperMethods/HelperMethods.mock";
 import HistorySource from "../../HistorySource/HistorySource.mock";
@@ -5,9 +6,8 @@ import HistorySource from "../../HistorySource/HistorySource.mock";
 const helperMethods = new HelperMethods(),
       historySource = new HistorySource(),
       history = new History(helperMethods, historySource),
-      helpersDoneSpy = jest.spyOn(helperMethods, "done"),
-      getHistorySpy = jest.spyOn(historySource, "getHistory");
-
+      helpersDoneSpy = jest.spyOn(helperMethods, "done");
+jest.spyOn(historySource, "getHistory");
 
 beforeEach(() => {
 
@@ -21,9 +21,30 @@ describe("History", () => {
 
         it("should get command history source", async () => {
 
-            await history.exec();
+            (historySource.getHistory as unknown as jest.Mock).mockImplementation(() => {
+                return Promise.resolve({'1': 'Ls'});
+            });
 
-            expect(getHistorySpy).toHaveBeenCalledTimes(1);
+            const data = await history.exec(),
+                  trimmedData: string = data.trim();
+
+            expect(trimmedData).toBe("1 Ls");
+
+        });
+
+        describe("when history source does not exist", () => {
+
+            it("should return message to say so", async () => {
+
+                (historySource.getHistory as unknown as jest.Mock).mockImplementation(() => {
+                    return Promise.resolve(undefined);
+                });
+    
+                const data = await history.exec();
+
+                expect(data).toBe("No history yet! Get writing commands!!");
+
+            });
 
         });
 

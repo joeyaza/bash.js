@@ -9,19 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+jest.mock("../../HistorySource/HistorySource");
 const History_1 = require("./History");
 const HelperMethods_mock_1 = require("../../HelperMethods/HelperMethods.mock");
 const HistorySource_mock_1 = require("../../HistorySource/HistorySource.mock");
-const helperMethods = new HelperMethods_mock_1.default(), historySource = new HistorySource_mock_1.default(), history = new History_1.default(helperMethods, historySource), helpersDoneSpy = jest.spyOn(helperMethods, "done"), getHistorySpy = jest.spyOn(historySource, "getHistory");
+const helperMethods = new HelperMethods_mock_1.default(), historySource = new HistorySource_mock_1.default(), history = new History_1.default(helperMethods, historySource), helpersDoneSpy = jest.spyOn(helperMethods, "done");
+jest.spyOn(historySource, "getHistory");
 beforeEach(() => {
     jest.clearAllMocks();
 });
 describe("History", () => {
     describe("when asked to execute command", () => {
         it("should get command history source", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield history.exec();
-            expect(getHistorySpy).toHaveBeenCalledTimes(1);
+            historySource.getHistory.mockImplementation(() => {
+                return Promise.resolve({ '1': 'Ls' });
+            });
+            const data = yield history.exec(), trimmedData = data.trim();
+            expect(trimmedData).toBe("1 Ls");
         }));
+        describe("when history source does not exist", () => {
+            it("should return message to say so", () => __awaiter(void 0, void 0, void 0, function* () {
+                historySource.getHistory.mockImplementation(() => {
+                    return Promise.resolve(undefined);
+                });
+                const data = yield history.exec();
+                expect(data).toBe("No history yet! Get writing commands!!");
+            }));
+        });
         it("should print the the command line history", () => __awaiter(void 0, void 0, void 0, function* () {
             yield history.exec();
             const outputData = helpersDoneSpy.mock.calls[0][0];

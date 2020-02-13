@@ -12,6 +12,7 @@ class HelperMethodsMock {
         };
     }
     done(output) {
+        return output;
     }
 }
 exports.default = HelperMethodsMock;

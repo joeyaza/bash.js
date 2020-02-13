@@ -2,52 +2,52 @@ import * as fs from "fs";
 
 class HistorySource {
 
-    private fileName = "history";
+    constructor(private fileName: string) {
 
-    constructor() {}
+         this.fileName = fileName;
 
-    public setHistory(cmd: {[key: number]: string}) {
+    }
 
-        fs.exists(this.fileName, async (exists: boolean) => {
+    public async setHistory(cmd: {[key: number]: string}) {
 
-            let historySourceToSet = JSON.stringify(cmd);
-            
-            if (exists) {
+        let historySourceToSet = JSON.stringify(cmd);
 
-                const data: string = await this.getHistoryFile(),
-                      currentHistorySourceObj = JSON.parse(data);
+        if (fs.existsSync(this.fileName)) {
 
-                currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
-                historySourceToSet = JSON.stringify(currentHistorySourceObj);
+            const data: string = await this.getHistoryFile(),
+            currentHistorySourceObj = JSON.parse(data);
+        
+            currentHistorySourceObj[Object.keys(cmd)[0]] = Object.values(cmd)[0];
+            historySourceToSet = JSON.stringify(currentHistorySourceObj);
 
-            }
+        }
+
+        try {
 
             await this.setHistoryFile(historySourceToSet);
 
-        }); 
+            return JSON.parse(historySourceToSet);
+
+        } catch(error) {
+
+            return `Error Setting File!`;
+
+        }
 
     }
 
     public async getHistory(): Promise<object | undefined> {
 
-        return new Promise((resolve) => {
+        if (fs.existsSync(this.fileName)) {
 
-            fs.exists(this.fileName, async (exists: boolean) => {
+            const data: string = await this.getHistoryFile(),
+            currentHistorySourceObj: object = JSON.parse(data);
 
-                if (exists) {  
-    
-                    const data: string = await this.getHistoryFile(),
-                            currentHistorySourceObj: object = JSON.parse(data);
-    
-                    return resolve(currentHistorySourceObj);
-        
-                }
-    
-                resolve(undefined);
-    
-            });
+            return currentHistorySourceObj;
 
-        });
+        }
+
+        return undefined;
 
     }
 
@@ -69,6 +69,7 @@ class HistorySource {
 
     }
 
+
     private getHistoryFile(): Promise<string> {
 
         return new Promise((resolve, reject) => {
@@ -84,6 +85,7 @@ class HistorySource {
         });
 
     }
+
 
     private setHistoryFile(cmd: string): Promise<boolean> {
 

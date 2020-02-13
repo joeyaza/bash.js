@@ -1,6 +1,5 @@
 declare class HistorySourceMock {
     constructor();
-    setHistory(): void;
     getHistory(): Promise<{
         '8': string;
         '9': string;
@@ -8,6 +7,5 @@ declare class HistorySourceMock {
         '11': string;
         '12': string;
     }>;
-    getLastCommand(): Promise<void>;
 }
 export default HistorySourceMock;

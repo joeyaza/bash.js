@@ -2,9 +2,6 @@ class HistorySourceMock {
 
     constructor() {}
 
-    public setHistory() {
-
-    }
 
     public async getHistory() {
 
@@ -17,10 +14,6 @@ class HistorySourceMock {
 
     }
 
-    public async getLastCommand() {
-
-
-    }
 
 }
 
