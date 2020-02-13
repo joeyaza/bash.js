@@ -16,8 +16,10 @@ class Touch {
     }
     exec(fileNames) {
         return __awaiter(this, void 0, void 0, function* () {
-            const fileNamesArr = fileNames.split(" "), fileNamesCreatedArr = yield Promise.all(this.writeFiles(fileNamesArr));
-            return Promise.resolve(this.helpers.done(`File with name ${fileNamesCreatedArr.join(", ")} created!`));
+            const fileNamesArr = fileNames.split(" "), fileNamesCreatedArr = yield Promise.all(this.writeFiles(fileNamesArr)), createdStr = (fileNamesArr.length > 1) ?
+                `Files with names ${fileNamesCreatedArr.join(" ")} created!` :
+                `File with name ${fileNamesCreatedArr} created!`;
+            return Promise.resolve(this.helpers.done(createdStr));
         });
     }
     writeFiles(fileNamesArr) {

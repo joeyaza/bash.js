@@ -13,9 +13,11 @@ export default class Touch implements ICommand {
 
         const fileNamesArr: string[] = fileNames.split(" "),
               fileNamesCreatedArr: string[] = await Promise.all(this.writeFiles(fileNamesArr)),
-              createdStr: string = 
+              createdStr: string = (fileNamesArr.length > 1) ? 
+              `Files with names ${fileNamesCreatedArr.join(" ")} created!` : 
+              `File with name ${fileNamesCreatedArr} created!`
 
-        return Promise.resolve(this.helpers.done(`File with name ${fileNamesCreatedArr.join(", ")} created!`));
+        return Promise.resolve(this.helpers.done(createdStr));
 
     }
 
