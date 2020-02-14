@@ -20,8 +20,9 @@ export default class Touch implements ICommand {
         return Promise.resolve(this.helpers.done(createdStr));
 
     }
+    
 
-    private writeFiles(fileNamesArr: string[]): any {
+    private writeFiles(fileNamesArr: string[]): Promise<string>[] {
 
         return fileNamesArr.map((name: string) => {
 

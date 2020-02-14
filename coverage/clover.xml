@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1581596322685" clover="3.2.0">
-  <project timestamp="1581596322686" name="All files">
-    <metrics statements="113" coveredstatements="110" conditionals="32" coveredconditionals="32" methods="51" coveredmethods="48" elements="196" coveredelements="190" complexity="0" loc="113" ncloc="113" packages="10" files="12" classes="12"/>
+<coverage generated="1581689963510" clover="3.2.0">
+  <project timestamp="1581689963510" name="All files">
+    <metrics statements="137" coveredstatements="134" conditionals="40" coveredconditionals="40" methods="63" coveredmethods="60" elements="240" coveredelements="234" complexity="0" loc="137" ncloc="137" packages="12" files="14" classes="14"/>
     <package name="Commands.Cat">
       <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
       <file name="Cat.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\Commands\Cat\Cat.ts">
@@ -41,21 +41,20 @@
       </file>
     </package>
     <package name="Commands.History">
-      <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
+      <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
       <file name="History.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\Commands\History\History.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="13" count="3" type="stmt"/>
         <line num="15" count="3" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="21" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
       </file>
     </package>
     <package name="Commands.Ls">
@@ -71,7 +70,7 @@
         <line num="20" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="22" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="26" count="15" type="stmt"/>
+        <line num="26" count="17" type="stmt"/>
         <line num="30" count="2" type="stmt"/>
       </file>
     </package>
@@ -98,6 +97,25 @@
         <line num="16" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="Commands.Rm">
+      <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <file name="Rm.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\Commands\Rm\Rm.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="34" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="3" type="stmt"/>
+      </file>
+    </package>
     <package name="Commands.Tail">
       <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
       <file name="Tail.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\Commands\Tail\Tail.ts">
@@ -114,14 +132,32 @@
         <line num="23" count="2" type="stmt"/>
       </file>
     </package>
+    <package name="Commands.Touch">
+      <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <file name="Touch.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\Commands\Touch\Touch.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="33" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="3" type="stmt"/>
+      </file>
+    </package>
     <package name="HelperMethods">
       <metrics statements="14" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="6"/>
       <file name="HelperMethods.mock.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\HelperMethods\HelperMethods.mock.ts">
         <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
         <line num="9" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="24" count="13" type="stmt"/>
-        <line num="30" count="8" type="stmt"/>
+        <line num="24" count="17" type="stmt"/>
+        <line num="30" count="10" type="stmt"/>
       </file>
       <file name="HelperMethods.ts" path="C:\Users\jazadehd\Documents\Development\bash-js\src\HelperMethods\HelperMethods.ts">
         <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>

@@ -3,5 +3,6 @@ import { ICommand } from "../../../index";
 export default class Touch implements ICommand {
     private helpers;
     constructor(helpers: Helpers);
-    exec(fileName: string): Promise<any>;
+    exec(fileNames: string): Promise<any>;
+    private deleteFiles;
 }
