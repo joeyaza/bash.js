@@ -17,7 +17,6 @@ class HelperMethods {
     }
     done(output) {
         process.stdout.write(output);
-        process.stdout.write('\nprompt > ');
     }
 }
 exports.default = HelperMethods;

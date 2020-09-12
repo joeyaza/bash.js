@@ -37,7 +37,7 @@ class HelperMethods implements Helpers {
 
         process.stdout.write(output);
 
-        process.stdout.write('\nprompt > ');
+        // process.stdout.write('\nprompt > ');
 
     }
 

@@ -10,7 +10,8 @@ export interface ICommand {
 const helpers = new HelperMethods(),
       historySource = new HistorySource("history");
 
-process.stdout.write('prompt > ');
+process.stdout.write('Type exit or exit() to leave shell :) \nprompt > ');
+// process.stdout.write('\nprompt > ');
 
 //the stdin 'data' event triggers after a user types in a line
 process.stdin.on("data", async (userInput: any) => {
@@ -33,6 +34,8 @@ process.stdin.on("data", async (userInput: any) => {
 
     try {
 
+        if (userInputStr.includes("exit")) process.stdout.write('\nThanks for using, bye! ') && process.exit();
+
         const userCmd: string = helpers.getCmd(userInputStr).toString(),
               {path, lineNumber} = helpers.getPath(userInputStr),
               historySourceNumber: number = await historySource.getLastCommand(),
@@ -45,9 +48,7 @@ process.stdin.on("data", async (userInput: any) => {
 
     } catch(error) {
 
-        console.warn("Looks like there's an issue ..." 
-                 + "in any case take a look at the below error message");
-        console.error(error.message);
+        process.stdout.write(`Looks like there's an issue ... in any case take a look at the below error message \n ${error.message}`);
         process.stdout.write('\nprompt > ');
 
     }
